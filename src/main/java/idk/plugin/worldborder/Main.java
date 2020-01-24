@@ -1,12 +1,12 @@
 package idk.plugin.worldborder;
 
-import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerTeleportEvent;
+import cn.nukkit.player.Player;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerMoveEvent;
-import cn.nukkit.math.Vector3;
+import cn.nukkit.math.Vector3f;
 import cn.nukkit.utils.Config;
 
 public class Main extends PluginBase implements Listener {
@@ -38,7 +38,7 @@ public class Main extends PluginBase implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
-        if (p.distance(new Vector3(p.getLevel().getSpawnLocation().getX(), p.getY(), p.getLevel().getSpawnLocation().getZ())) > distance) {
+        if (p.distance(new Vector3f(p.getLevel().getSpawnLocation().getX(), p.getY(), p.getLevel().getSpawnLocation().getZ())) > distance) {
             p.sendMessage(message);
             e.setCancelled(true);
 
@@ -50,7 +50,7 @@ public class Main extends PluginBase implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onTeleport(PlayerTeleportEvent e) {
-        if (e.getTo().distance(new Vector3(e.getTo().getLevel().getSpawnLocation().getX(), e.getTo().getY(), e.getTo().getLevel().getSpawnLocation().getZ())) > distance) {
+        if (e.getTo().distance(new Vector3f(e.getTo().getLevel().getSpawnLocation().getX(), e.getTo().getY(), e.getTo().getLevel().getSpawnLocation().getZ())) > distance) {
             e.getPlayer().sendMessage(messageTp);
             e.setCancelled(true);
         }
